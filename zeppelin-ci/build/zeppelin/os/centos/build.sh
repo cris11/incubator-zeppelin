@@ -131,9 +131,9 @@ do
 		first_build $SPARK_VERSION $SPARK_PROFILE $HADOOP_PROFILE
 	else
 		if [[ $SPARK_PROFILE == "1.2" || $SPARK_PROFILE == "1.1" ]]; then
-			etc_build $SPARK_VER $SPARK_PROFILE $HADOOP_PROFILE
+			etc_build $SPARK_VERSION $SPARK_PROFILE $HADOOP_PROFILE
 		else
-			skiptests_etc_build $SPARK_VER $SPARK_PROFILE $HADOOP_PROFILE
+			skiptests_etc_build $SPARK_VERSION $SPARK_PROFILE $HADOOP_PROFILE
 		fi
 	fi
 	let "arg_num+=1"

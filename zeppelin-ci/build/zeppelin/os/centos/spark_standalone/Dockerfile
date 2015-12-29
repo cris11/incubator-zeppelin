@@ -62,4 +62,4 @@ RUN chmod 700 /build.sh
 
 EXPOSE 8080 8081
 
-ENTRYPOINT ["/build.sh"]
+#ENTRYPOINT ["/build.sh"]
