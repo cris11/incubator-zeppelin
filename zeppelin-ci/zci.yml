@@ -19,7 +19,7 @@ SPARK:
 #   - Range : 1 ~ 4
 # -----------------------------------------
 BUILD_JOB:
-    1:none
-    2:spark_mesos
+    1:spark_mesos
+    2:none
     3:spark_yarn
     4:spark_standalone
