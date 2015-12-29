@@ -2,7 +2,7 @@
 #  Set Env
 # -----------------------------------------
 IMAGE:
-    VERSION:0.6
+    VERSION:0.5
 
 JDK:
     VERSION:1.7.0
