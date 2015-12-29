@@ -26,10 +26,10 @@ function first_build
 	SPARK_DAT=spark-$SPARK_VER-bin-hadoop$HADOOP_VER
 
 	mvn package -DskipTests -Pspark-$SPARK_PRO -Phadoop-$HADOOP_VER -Ppyspark -B
-	echo "- Done : mvn package -DskipTests -Pspark-$SPARK_PRO -Phadoop-$HADOOP_VER -Ppyspark -B" 
+	echo "- Done : mvn package Install spark-$SPARK_PRO, hadoop-$HADOOP_VER" 
 
 	mvn package -Pbuild-distr -Pspark-$SPARK_PRO -Phadoop-$HADOOP_VER -Ppyspark -B
-	echo "- Done : mvn package -Pbuild-distr -Pspark-$SPARK_PRO -Phadoop-$HADOOP_VER -Ppyspark -B"
+	echo "- Done : mvn package build-distr spark-$SPARK_PRO, hadoop-$HADOOP_VER"
 
 	echo "- Build mvn package with spark-$SPARK_PRO, hadoop-$HADOOP_VER"
 	\cp -f /tmp/zeppelin-env.sh /zeppelin/conf/
