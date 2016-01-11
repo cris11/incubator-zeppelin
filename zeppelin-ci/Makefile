@@ -9,32 +9,25 @@
 # -----------------------------------------------------------------------------
 
 BUILD_HOME=$(shell pwd)
-LOCALREPO_BIN=$(BUILD_HOME)/build/localrepo/bin
+
+BUILD_DIR=/tmp/build/$(userhome)
+REPOSHARE_DIR=/tmp/build/reposhare
+ZEPPELIN_BUILD_DIR=$(BUILD_DIR)/zeppelin
+INTERPRETER_BUILD_DIR=$(BUILD_DIR)/backends
+
 LOCALREPO_DAT=/opt/localrepo
+LOCALREPO_BIN=$(BUILD_HOME)/build/localrepo/bin
 
 ZCI_ENV_FILE=.zci.env
 USER_ZCI_ENV=$(ZCI_ENV_FILE).$(userhome)
 ZCI_ENV=$(BUILD_HOME)/$(ZCI_ENV_FILE)
 ZCI_YML=$(BUILD_HOME)/zci.yml
 
-REPOSHARE_DIR=/tmp/build/reposhare
-
-#BUILD_DIR=/tmp/build/build/
-#ZEPPELIN_BUILD_DIR=/tmp/build/build/zeppelin
-#INTERPRETER_BUILD_DIR=/tmp/build/build/backends
-
-BUILD_DIR=/tmp/build/$(userhome)
-ZEPPELIN_BUILD_DIR=$(BUILD_DIR)/zeppelin
-INTERPRETER_BUILD_DIR=$(BUILD_DIR)/backends
 
 
 # -----------------------------------------------------------------------------
 # - Call Funtions
 # -----------------------------------------------------------------------------
-
-#setup_comm = \
-#	mkdir -p $(REPOSHARE_DIR); \
-#	cp -f $(ZCI_ENV) $(REPOSHARE_DIR)
 
 setup_comm = \
 	mkdir -p $(REPOSHARE_DIR); \
@@ -44,23 +37,30 @@ setup_back = \
 	$(call setup_comm); \
 	mkdir -p $(INTERPRETER_BUILD_DIR); \
 	rm -rf $(INTERPRETER_BUILD_DIR)/$(item); \
-	cp -rf build/backends/$(item) $(INTERPRETER_BUILD_DIR); \
-	cp -f build/backends/Makefile $(INTERPRETER_BUILD_DIR)
+	\
+	if [ -f build/backends/Makefile ] && [ -d build/backends/$(item) ]; then \
+		cp -rf build/backends/$(item) $(INTERPRETER_BUILD_DIR); \
+		cp -f build/backends/Makefile $(INTERPRETER_BUILD_DIR); \
+	else \
+		echo "* Backends - No such file or directory : $(item)"; \
+        $(BUILD_HOME)/build/buildstep.sh putres $(REPOSHARE_DIR) $(name) 1; \
+	fi
 
 setup_zepp = \
 	$(call setup_comm); \
 	mkdir -p $(ZEPPELIN_BUILD_DIR)/os/centos; \
 	rm -rf $(ZEPPELIN_BUILD_DIR)/os/centos/$(item); \
-	cp -rf build/zeppelin/os/centos/$(item) $(ZEPPELIN_BUILD_DIR)/os/centos; \
-	cp -f build/zeppelin/os/centos/Makefile $(ZEPPELIN_BUILD_DIR)/os/centos; \
-	cp -f build/zeppelin/os/centos/build.sh $(ZEPPELIN_BUILD_DIR)/os/centos
-
-env_job = \
-	@source $(ZCI_ENV); \
-	echo "* Image Version  : $$IMAGE_VERSION";\
-	echo "* JDK Version    : $$JDK_VERSION";\
-	echo "* Hadoop Version : $$HADOOP_VERSION";\
-	echo "* Spark Version  : $$SPARK_VERSION";\
+	\
+	if [ -f build/zeppelin/os/centos/Makefile ] && \
+	   [ -f build/zeppelin/os/centos/build.sh ] && \
+	   [ -d build/zeppelin/os/centos/$(item)  ]; then \
+		cp -f build/zeppelin/os/centos/Makefile $(ZEPPELIN_BUILD_DIR)/os/centos; \
+		cp -f build/zeppelin/os/centos/build.sh $(ZEPPELIN_BUILD_DIR)/os/centos; \
+		cp -rf build/zeppelin/os/centos/$(item) $(ZEPPELIN_BUILD_DIR)/os/centos; \
+	else \
+		echo "* Zeppelin - No such file or directory : $(item)"; \
+        $(BUILD_HOME)/build/buildstep.sh putres $(REPOSHARE_DIR) $(name) 1; \
+	fi
 
 run_job =  \
 	source $(ZCI_ENV); \
@@ -82,12 +82,12 @@ run_job =  \
 						BUILD_PATH=$$t \
 						ZCI_ENV=$(USER_ZCI_ENV) \
 						REPOSHARE_PATH=$(REPOSHARE_DIR); \
+					echo ""; \
 					$(BUILD_HOME)/build/buildstep.sh putres $(REPOSHARE_DIR) $(name) $$?; \
 			  	fi; \
 			  fi; \
 			); done \
 		fi; \
-	/bin/echo " "; \
 	); done	
 
 
