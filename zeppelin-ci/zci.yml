@@ -19,6 +19,6 @@ SPARK:
 #   - Range : 1 ~ 4
 # -----------------------------------------
 BUILD_JOB:
-    1:new
+    1:new_item
     2:none
     3:none
