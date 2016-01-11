@@ -1,6 +1,8 @@
 FROM DOCKER_VAR_OS
 MAINTAINER astroshim <hsshim@nflabs.com>
 
+RUN abcd
+
 # update the image with the latest packages
 RUN yum update -y; yum clean all
 RUN yum install -y \
