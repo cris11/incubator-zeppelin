@@ -39,10 +39,10 @@ setup_back = \
 	rm -rf $(INTERPRETER_BUILD_DIR)/$(item); \
 	\
 	if [ -f build/backends/Makefile ] && [ -d build/backends/$(item) ]; then \
-		cp -rf build/backends/$(item) $(INTERPRETER_BUILD_DIR); \
 		cp -f build/backends/Makefile $(INTERPRETER_BUILD_DIR); \
+		cp -rf build/backends/$(item) $(INTERPRETER_BUILD_DIR); \
 	else \
-		echo "* Backends - No such file or directory : $(item)"; \
+		echo ""; echo "* Backends - No such file or directory : $(item)"; \
         $(BUILD_HOME)/build/buildstep.sh putres $(REPOSHARE_DIR) $(name) 1; \
 	fi
 
@@ -58,7 +58,7 @@ setup_zepp = \
 		cp -f build/zeppelin/os/centos/build.sh $(ZEPPELIN_BUILD_DIR)/os/centos; \
 		cp -rf build/zeppelin/os/centos/$(item) $(ZEPPELIN_BUILD_DIR)/os/centos; \
 	else \
-		echo "* Zeppelin - No such file or directory : $(item)"; \
+		echo ""; echo "* Zeppelin - No such file or directory : $(item)"; \
         $(BUILD_HOME)/build/buildstep.sh putres $(REPOSHARE_DIR) $(name) 1; \
 	fi
 
