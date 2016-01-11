@@ -82,8 +82,8 @@ run_job =  \
 						BUILD_PATH=$$t \
 						ZCI_ENV=$(USER_ZCI_ENV) \
 						REPOSHARE_PATH=$(REPOSHARE_DIR); \
-					echo ""; \
 					$(BUILD_HOME)/build/buildstep.sh putres $(REPOSHARE_DIR) $(name) $$?; \
+					echo ""; \
 			  	fi; \
 			  fi; \
 			); done \
