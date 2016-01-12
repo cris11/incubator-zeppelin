@@ -32,7 +32,7 @@ RUN tar xzf /tmp/apache-maven-$MAVEN_VERSION-bin.tar.gz -C /usr/share \
   && mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven \
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 ENV MAVEN_HOME /usr/share/maven
-COPY maven-settings.xml /usr/share/maven/conf/settings.xml
+###COPY maven-settings.xml /usr/share/maven/conf/settings.xml
 
 # copy zeppelin config.
 COPY zeppelin-env.sh /tmp/
