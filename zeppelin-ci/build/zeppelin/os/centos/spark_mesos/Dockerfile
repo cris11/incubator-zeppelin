@@ -37,10 +37,6 @@ ENV MAVEN_HOME /usr/share/maven
 # copy zeppelin config.
 COPY zeppelin-env.sh /tmp/
 
-# install mesos
-RUN rpm -Uvh http://repos.mesosphere.com/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm
-RUN yum -y install mesos
-
 # fake display with firefox 
 ENV DISPLAY :99
 RUN rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
@@ -56,6 +52,11 @@ RUN yum -y install ImageMagick
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/firefox:/usr/lib:/usr/local/lib:/usr/lib64:/usr/local/lib64:/lib64:/lib 
 RUN yum install -y alsa-lib.x86_64
 RUN yum install -y libmozalloc.so
+
+# install mesos
+RUN date
+RUN rpm -Uvh http://repos.mesosphere.com/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm
+RUN yum -y install mesos
 
 # Py4j for PySpark
 RUN easy_install py4j
