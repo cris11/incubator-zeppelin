@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 SPARK_SHARE=/reposhare/$BUILD_TYPE
+BUILD_HOME=/reposhare/$BUILD_TYPE/user/$CONT_NAME
 
 echo "# ZCI-ENV FILE : $ZCI_ENV"
 source /reposhare/$ZCI_ENV
@@ -106,8 +107,10 @@ Xvfb $DISPLAY -ac -screen 0 1280x1024x24 &
 # Cloning zeppelin
 # ----------------------------------------------------------------------
 /buildstep.sh log $BUILDSTEP_ZEP "- $BUILDSTEP_ZEP : Info, Cloning zeppelin"
-git clone -b $BRANCH $REPO /zeppelin
-cd /zeppelin
+#git clone -b $BRANCH $REPO /zeppelin
+#cd /zeppelin
+git clone -b $BRANCH $REPO ${BUILD_HOME}/zeppelin
+cd ${BUILD_HOME}/zeppelin
 
 
 # ----------------------------------------------------------------------
@@ -142,6 +145,8 @@ do
 	/buildstep.sh log $BUILDSTEP_ZEP "- $BUILDSTEP_ZEP : wait for backend - spark $SPARK_VERSION"
 	/buildstep.sh waitfor $BUILDSTEP_BAK "- $BUILDSTEP_BAK : closed $BUILD_TYPE backend spark $SPARK_VERSION"
 done
+
+rm -rf $BUILD_HOME
 echo "Done!"
 
 
