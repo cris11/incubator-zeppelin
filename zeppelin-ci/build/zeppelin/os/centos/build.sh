@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
-echo "# ZCI-ENV FILE : $ZCI_ENV"
+echo "# Script version : 0.3"
+echo "# ZCI-ENV File   : $ZCI_ENV"
 source /reposhare/$ZCI_ENV
 
 SPARK_SHARE=/reposhare/$BUILD_TYPE
@@ -30,7 +31,6 @@ function build_all_modules
 	PROFILE="-Pspark-$SPARK_PRO -Phadoop-$HADOOP_VER -Ppyspark -Pscalding"
 	BUILD_FLAG="package -Pbuild-distr"
 	TEST_FLAG="verify -Drat.skip=true -Pusing-packaged-distr"
-	#TEST_FLAG="verify -Pusing-packaged-distr"
 
 	mvn $BUILD_FLAG $PROFILE -B
 
@@ -52,7 +52,6 @@ function build_spark_module
 	BUILD_FLAG="package -DskipTests"
 	TEST_FLAG="verify -Drat.skip=true"
 
-    #rm -rf $ZEPPELIN_HOME/interpreter/spark
 	mvn $BUILD_FLAG $PROFILE -B
 
 	\cp -f /tmp/zeppelin-env.sh $ZEPPELIN_HOME/conf/
@@ -88,10 +87,8 @@ Xvfb $DISPLAY -ac -screen 0 1280x1024x24 &
 
 
 # ----------------------------------------------------------------------
-# Cloning zeppelin
+# Move to Zeppelin
 # ----------------------------------------------------------------------
-#/buildstep.sh log $BUILDSTEP_ZEP "- $BUILDSTEP_ZEP : Info, Cloning zeppelin"
-#git clone --depth 50 -b $BRANCH $REPO $ZEPPELIN_HOME
 cd $ZEPPELIN_HOME
 
 
@@ -110,7 +107,7 @@ do
 	##### Build Step 1
 	/buildstep.sh log $BUILDSTEP_ZEP "- $BUILDSTEP_ZEP : started $BUILD_TYPE build spark $SPARK_VERSION"
 
-	##### Build Step 2 ( build spark 1.x )
+	##### Build Step 2
 	if [[ $arg_num == 0 ]]; then
 		build_all_modules $SPARK_VERSION $SPARK_PROFILE $HADOOP_PROFILE
 	else
