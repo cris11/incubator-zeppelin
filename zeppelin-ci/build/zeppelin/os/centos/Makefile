@@ -84,7 +84,6 @@ run :
 		echo "# Host Port : $(ZEPPELIN_HOST_PORT_STANDALONE) , $(ZEPPELIN_HOST_WEBSOCKET_PORT_STANDALONE)"; \
 		docker run --rm -i \
         -v $(REPOSHARE_PATH):/reposhare \
-        -v $(REPOSHARE_PATH)/$(type)/user/$(name)/.m2:/root/.m2 \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
 		-e ZCI_ENV=$(ZCI_ENV) \
@@ -100,7 +99,6 @@ run :
 		echo "# Host Port : $(ZEPPELIN_HOST_PORT_YARN) , $(ZEPPELIN_HOST_WEBSOCKET_PORT_YARN)"; \
 		docker run --rm -i \
         -v $(REPOSHARE_PATH):/reposhare \
-        -v $(REPOSHARE_PATH)/$(type)/user/$(name)/.m2:/root/.m2 \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
 		-e ZCI_ENV=$(ZCI_ENV) \
@@ -116,7 +114,6 @@ run :
 		echo "# Host Port : $(ZEPPELIN_HOST_PORT_MESOS) , $(ZEPPELIN_HOST_WEBSOCKET_PORT_MESOS)"; \
 		docker run --rm -i \
         -v $(REPOSHARE_PATH):/reposhare \
-        -v $(REPOSHARE_PATH)/$(type)/user/$(name)/.m2:/root/.m2 \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
 		-e ZCI_ENV=$(ZCI_ENV) \
@@ -133,7 +130,6 @@ run :
 		\
 		docker run --rm -i \
         -v $(REPOSHARE_PATH):/reposhare \
-        -v $(REPOSHARE_PATH)/$(type)/user/$(name)/.m2:/root/.m2 \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
 		-e ZCI_ENV=$(ZCI_ENV) \
