@@ -50,7 +50,7 @@ function build_spark_module
 
 	PROFILE="-Pspark-$SPARK_PRO -Phadoop-$HADOOP_VER -Ppyspark"
 	BUILD_FLAG="package -DskipTests"
-	TEST_FLAG="verify"
+	TEST_FLAG="verify -Drat.skip=true"
 
     #rm -rf $ZEPPELIN_HOME/interpreter/spark
 	mvn $BUILD_FLAG $PROFILE -B
