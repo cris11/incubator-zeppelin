@@ -18,7 +18,7 @@ MVN_OPT_FLAG="-Dmaven.repo.local=$ZEPP_HOME/.m2"
 BUILDSTEP_TIMEOUT=300
 BUILDSTEP_BIN=$USER_HOME/zeppelin/zeppelin-ci/build/buildstep.sh
 BUILDSTEP_DIR=/tmp/build/reposhare/buildstep/build
-BUILDSTEP=${ZEPP_ID}_build.bs
+BUILDSTEP=${ZEPP_ID}.bs
 
 $BUILDSTEP_BIN init $BUILDSTEP_DIR $BUILDSTEP_TIMEOUT
 $BUILDSTEP_BIN log $BUILDSTEP "# Start, zeppelin build ..."
@@ -60,7 +60,10 @@ do
 	$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : started zeppelin build for spark $SPARK_VERSION"
 
 	cd zeppelin_$SPARK_VERSION
-	mvn $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
+	which mvn
+	#mvn $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
+
+	/usr/local/bin/mvn $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
 
 	cd $USER_HOME
 	mv zeppelin_$SPARK_VERSION $ZEPP_HOME/
