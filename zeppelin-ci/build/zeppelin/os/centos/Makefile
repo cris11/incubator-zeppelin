@@ -83,6 +83,7 @@ run :
 		echo "# Run spark standalone mode zeppelin! "; \
 		echo "# Host Port : $(ZEPPELIN_HOST_PORT_STANDALONE) , $(ZEPPELIN_HOST_WEBSOCKET_PORT_STANDALONE)"; \
 		docker run --rm -i \
+		$(mvnrepo) \
         -v $(REPOSHARE_PATH):/reposhare \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
