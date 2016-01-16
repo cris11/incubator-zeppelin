@@ -16,6 +16,7 @@ ZEPP_HOME=$BUILD_HOME/$ZEPP_ID
 MVN_OPT_FLAG="-Dmaven.repo.local=$ZEPP_HOME/.m2"
 
 BUILDSTEP_TIMEOUT=300
+#BUILDSTEP_BIN=/buildstep.sh
 BUILDSTEP_BIN=$USER_HOME/zeppelin/zeppelin-ci/build/buildstep.sh
 BUILDSTEP_DIR=/tmp/build/reposhare/buildstep/build
 BUILDSTEP=${ZEPP_ID}.bs

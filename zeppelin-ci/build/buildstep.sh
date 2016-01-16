@@ -145,19 +145,42 @@ function buildstep_putres
 }
 
 
+#function buildstep_getport
+#{
+#	while true
+#	do
+#		# rnd port : 10000 ~ 65000
+#		port=`head -100 /dev/urandom | cksum | cut -f1 -d " " | awk '{print $1%55000+10000}'`
+#		res=`nc -z -v localhost $port 2>&1 | grep succ | wc -l`
+#		if [[ $res == 0 ]]; then
+#			res=`netstat -na | grep TIME_WAIT | grep $port | wc -l`
+#			if [[ $res == 0 ]]; then
+#				echo $port
+#				break
+#			fi
+#		fi
+#	done
+#}
+
 function buildstep_getport
 {
 	while true
 	do
 		# rnd port : 10000 ~ 65000
 		port=`head -100 /dev/urandom | cksum | cut -f1 -d " " | awk '{print $1%55000+10000}'`
+
 		res=`nc -z -v localhost $port 2>&1 | grep succ | wc -l`
+		if [[ $res != 0 ]]; then
+			break
+		fi
+		res=`netstat -na | grep TIME_WAIT | grep $port | wc -l`
+		if [[ $res != 0 ]]; then
+			break
+		fi
+		res=`docker ps -a | grep $port | wc -l`
 		if [[ $res == 0 ]]; then
-			res=`netstat -na | grep TIME_WAIT | grep $port | wc -l`
-			if [[ $res == 0 ]]; then
-				echo $port
-				break
-			fi
+			echo $port
+			break
 		fi
 	done
 }
