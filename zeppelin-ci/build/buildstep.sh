@@ -116,7 +116,9 @@ function buildstep_waitfor
         fi
 
 		let "timeout+=1"
-		echo "# Build step - wait($timeout)..."
+		if [[ `expr $timeout % 10` == 0 ]]; then
+			echo "# Build step - wait($timeout)..."
+		fi
 		sleep 1
 
 		if [[ $BS_TIMEOUT == $timeout ]]; then
