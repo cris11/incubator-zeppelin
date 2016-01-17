@@ -61,11 +61,7 @@ do
 	$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : started zeppelin build for spark $SPARK_VERSION"
 
 	cd zeppelin_$SPARK_VERSION
-	#which mvn
-	#mvn $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
-	echo "ok"
 	/usr/local/bin/mvn $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
-	echo "ok"
 
 	cd $USER_HOME
 	mv zeppelin_$SPARK_VERSION $ZEPP_HOME/
