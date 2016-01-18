@@ -60,16 +60,16 @@ RUN easy_install py4j
 RUN mkdir -p /reposhare
 
 # update buildstep
-#COPY buildstep.sh /buildstep.sh
-#RUN chown root.root /buildstep.sh
-#RUN chmod 700 /buildstep.sh
+COPY buildstep.sh /buildstep.sh
+RUN chown root.root /buildstep.sh
+RUN chmod 700 /buildstep.sh
 
 # update boot script
-#COPY build.sh /build.sh
-#RUN chown root.root /build.sh
-#RUN chmod 700 /build.sh
+#reposhare
+#COPY build.sh /reposhare/scripts/build.sh
+#RUN chown root.root /reposhare/scripts/build.sh
+#RUN chmod 700 /reposhare/scripts/build.sh
 
 EXPOSE 8080 8081
 
-#ENTRYPOINT ["/build.sh"]
 ENTRYPOINT ["/reposhare/scripts/build.sh"]
