@@ -54,7 +54,6 @@ do
 		BUILD_PROFILE="-Pspark-$SPARK_PRO -Phadoop-$HADOOP_VER -Ppyspark"
 		BUILD_FLAG="package -DskipTests"
 	fi
-	let "arg_num+=1"
 
 	# ---------------------------------------
 	#  copy source
@@ -83,6 +82,8 @@ do
 	else
 		$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : finished zeppelin build for spark $SPARK_VERSION"
 	fi
+
+	let "arg_num+=1"
 	sleep 1
 done
 echo "Zeppelin Build Done!"

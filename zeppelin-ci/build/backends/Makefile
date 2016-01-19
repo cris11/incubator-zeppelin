@@ -99,6 +99,7 @@ run :
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
 		--cpu-shares=256 \
+		--cpu-quota=25000 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
@@ -115,6 +116,7 @@ run :
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
 		--cpu-shares=256 \
+		--cpu-quota=25000 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
@@ -143,6 +145,7 @@ run :
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
 		--cpu-shares=256 \
+		--cpu-quota=25000 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
