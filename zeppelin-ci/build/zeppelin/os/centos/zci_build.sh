@@ -13,7 +13,8 @@ source $ENV_FILE
 # Define Variable
 # ----------------------------------------------------------------------
 ZEPP_HOME=$BUILD_HOME/$ZEPP_ID
-MVN_OPT_FLAG="-Dmaven.repo.local=$ZEPP_HOME/.m2"
+MVN_OPT_FLAG="-Dmaven.repo.local=$ZEPP_HOME/.m2 -s /tmp/build/reposhare/conf/maven-settings.xml"
+MVN_DEP_FLAG="dependency:list $MVN_OPT_FLAG"
 
 BUILDSTEP_TIMEOUT=300
 #BUILDSTEP_BIN=/buildstep.sh
@@ -23,6 +24,9 @@ BUILDSTEP=${ZEPP_ID}.bs
 
 $BUILDSTEP_BIN init $BUILDSTEP_DIR $BUILDSTEP_TIMEOUT
 $BUILDSTEP_BIN log $BUILDSTEP "# Start, zeppelin build ..."
+
+cd $USER_HOME/zeppelin
+mvn $MVN_DEP_RUN
 
 
 # ----------------------------------------------------------------------
