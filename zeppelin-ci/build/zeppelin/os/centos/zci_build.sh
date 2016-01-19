@@ -75,7 +75,14 @@ do
 
 
 	##### Build Step 3
-	$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : finished zeppelin build for spark $SPARK_VERSION"
+	if [[ $arg_num == 0 ]]; then
+		LAZY_STEP=$SPARK_VERSION
+	elif [[ $arg_num == 1 ]]; then
+		$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : finished zeppelin build for spark $LAZY_STEP"
+		$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : finished zeppelin build for spark $SPARK_VERSION"
+	else
+		$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : finished zeppelin build for spark $SPARK_VERSION"
+	fi
 	sleep 1
 done
 echo "Zeppelin Build Done!"
