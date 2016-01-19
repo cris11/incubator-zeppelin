@@ -98,6 +98,7 @@ run :
 		-e BUILD_TYPE=$(type) \
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
+		--cpu-shares=256 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
@@ -113,6 +114,7 @@ run :
 		-e BUILD_TYPE=$(type) \
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
+		--cpu-shares=256 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
@@ -140,6 +142,7 @@ run :
 		-e BUILD_TYPE=$(type) \
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
+		--cpu-shares=256 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
