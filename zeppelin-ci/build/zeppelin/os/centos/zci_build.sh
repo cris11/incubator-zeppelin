@@ -12,6 +12,7 @@ source $ENV_FILE
 # ----------------------------------------------------------------------
 # Define Variable
 # ----------------------------------------------------------------------
+MVN_BIN="/usr/local/bin/mvn"
 ZEPP_HOME=$BUILD_HOME/$ZEPP_ID
 MVN_OPT_FLAG="-Dmaven.repo.local=$ZEPP_HOME/.m2 -s /tmp/build/reposhare/conf/maven-settings.xml"
 MVN_DEP_FLAG="dependency:list $MVN_OPT_FLAG"
@@ -26,7 +27,7 @@ $BUILDSTEP_BIN init $BUILDSTEP_DIR $BUILDSTEP_TIMEOUT
 $BUILDSTEP_BIN log $BUILDSTEP "# Start, zeppelin build ..."
 
 cd $USER_HOME/zeppelin
-mvn $MVN_DEP_RUN
+$MVN_BIN $MVN_DEP_RUN
 
 
 # ----------------------------------------------------------------------
@@ -65,7 +66,8 @@ do
 	$BUILDSTEP_BIN log $BUILDSTEP "- $BUILDSTEP : started zeppelin build for spark $SPARK_VERSION"
 
 	cd zeppelin_$SPARK_VERSION
-	/usr/local/bin/mvn $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
+	$MVN_BIN $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
+	#/usr/local/bin/mvn $MVN_OPT_FLAG $BUILD_FLAG $PROFILE -B
 
 	cd $USER_HOME
 	mv zeppelin_$SPARK_VERSION $ZEPP_HOME/
