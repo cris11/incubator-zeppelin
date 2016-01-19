@@ -93,6 +93,7 @@ run :
 		-e CONT_NAME=$(BACKEND_CONTAINER_NAME) \
 		-p $(ZEPPELIN_HOST_PORT_STANDALONE):$(ZEPPELIN_PORT) \
 		-p $(ZEPPELIN_HOST_WEBSOCKET_PORT_STANDALONE):$(ZEPPELIN_WEBSOCKET_PORT) \
+		--net=host \
 		--link $(BACKEND_CONTAINER_NAME):$(NICKNAME) \
 		zeppelin-$(type):$(IMAGE_VERSION) /bin/bash; \
 		\
@@ -109,6 +110,7 @@ run :
 		-e CONT_NAME=$(BACKEND_CONTAINER_NAME) \
 		-p $(ZEPPELIN_HOST_PORT_YARN):$(ZEPPELIN_PORT) \
 		-p $(ZEPPELIN_HOST_WEBSOCKET_PORT_YARN):$(ZEPPELIN_WEBSOCKET_PORT) \
+		--net=host \
 		--link $(BACKEND_CONTAINER_NAME):$(NICKNAME) \
 		zeppelin-$(type):$(IMAGE_VERSION) /bin/bash; \
 		\
@@ -125,6 +127,7 @@ run :
 		-e CONT_NAME=$(BACKEND_CONTAINER_NAME) \
 		-p $(ZEPPELIN_HOST_PORT_MESOS):$(ZEPPELIN_PORT) \
 		-p $(ZEPPELIN_HOST_WEBSOCKET_PORT_MESOS):$(ZEPPELIN_WEBSOCKET_PORT) \
+		--net=host \
 		--link $(BACKEND_CONTAINER_NAME):$(NICKNAME) \
 		zeppelin-$(type):$(IMAGE_VERSION) /bin/bash; \
 		\
@@ -142,6 +145,7 @@ run :
 		-e CONT_NAME=$(BACKEND_CONTAINER_NAME) \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
 		-p $(GET_RND_PORT):$(ZEPPELIN_WEBSOCKET_PORT) \
+		--net=host \
 		--link $(BACKEND_CONTAINER_NAME):$(NICKNAME) \
 		zeppelin-$(type):$(IMAGE_VERSION) /bin/bash; \
 		\
