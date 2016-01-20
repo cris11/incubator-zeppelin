@@ -98,8 +98,6 @@ run :
 		-e BUILD_TYPE=$(type) \
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
-		--cpu-shares=256 \
-		--cpu-quota=25000 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
@@ -115,8 +113,6 @@ run :
 		-e BUILD_TYPE=$(type) \
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
-		--cpu-shares=256 \
-		--cpu-quota=25000 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
@@ -144,8 +140,6 @@ run :
 		-e BUILD_TYPE=$(type) \
 		-e ZCI_ENV=$(ZCI_ENV) \
 		-e CONT_NAME=$(name) \
-		--cpu-shares=256 \
-		--cpu-quota=25000 \
 		--name $(name) \
 		-h sparkmaster \
 		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
@@ -164,6 +158,8 @@ run :
 		echo "not found to run backend."; \
 	fi
 
+#		--cpu-shares=256 \
+#		--cpu-quota=25000 \
 # ----------------------------------------------------
 # - New_item Adding Guide
 # ----------------------------------------------------
