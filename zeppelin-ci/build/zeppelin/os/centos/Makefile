@@ -8,7 +8,7 @@
 # - Define Varialbes 
 # ----------------------------------------------------------------------
 
-USERS_PATH=/tmp/build/users
+USERS_PATH=/tmp/build/users/$(userhome)
 LOCALREPO_BIN=$(BUILD_HOME)/build/localrepo/bin
 LOCALREPO_DAT=/opt/localrepo
 REPOSHARE_ENV=$(REPOSHARE_PATH)/$(ZCI_ENV)
