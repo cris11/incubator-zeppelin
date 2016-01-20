@@ -15,13 +15,6 @@ function buildstep_init
     echo "export BS_TIMEOUT=$bs_timeout" >> $BS_PROFILE
 }
 
-function buildstep_chd
-{
-    bs_logdir=$2
-
-    mkdir -p $bs_logdir
-    echo "export BS_PATH=$bs_logdir" > $BS_PROFILE
-}
 
 function buildstep_envload
 {
@@ -123,9 +116,7 @@ function buildstep_waitfor
         fi
 
 		let "timeout+=1"
-		if [[ $timeout == 1 ]]; then
-			echo "# Build step - wait..."
-		fi
+		echo "# Build step - wait($timeout)..."
 		sleep 1
 
 		if [[ $BS_TIMEOUT == $timeout ]]; then
@@ -160,19 +151,13 @@ function buildstep_getport
 	do
 		# rnd port : 10000 ~ 65000
 		port=`head -100 /dev/urandom | cksum | cut -f1 -d " " | awk '{print $1%55000+10000}'`
-
 		res=`nc -z -v localhost $port 2>&1 | grep succ | wc -l`
-		if [[ $res != 0 ]]; then
-			break
-		fi
-		res=`netstat -na | grep $port | wc -l`
-		if [[ $res != 0 ]]; then
-			break
-		fi
-		res=`docker ps -a | grep $port | wc -l`
 		if [[ $res == 0 ]]; then
-			echo $port
-			break
+			res=`netstat -na | grep TIME_WAIT | grep $port | wc -l`
+			if [[ $res == 0 ]]; then
+				echo $port
+				break
+			fi
 		fi
 	done
 }
@@ -188,9 +173,6 @@ function buildstep
 	case $1 in
 		init)
 			buildstep_init $*
-			;;
-		chd)
-			buildstep_chd $*
 			;;
 		envload)
 			buildstep_envload $2 $3

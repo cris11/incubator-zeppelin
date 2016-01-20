@@ -8,7 +8,6 @@
 # - Define Varialbes 
 # ----------------------------------------------------------------------
 
-USERS_PATH=/tmp/build/users/$(userhome)
 LOCALREPO_BIN=$(BUILD_HOME)/build/localrepo/bin
 LOCALREPO_DAT=/opt/localrepo
 REPOSHARE_ENV=$(REPOSHARE_PATH)/$(ZCI_ENV)
@@ -84,7 +83,6 @@ run :
 		echo "# Run spark standalone mode zeppelin! "; \
 		echo "# Host Port : $(ZEPPELIN_HOST_PORT_STANDALONE) , $(ZEPPELIN_HOST_WEBSOCKET_PORT_STANDALONE)"; \
 		docker run --rm -i \
-        -v $(USERS_PATH):/user \
         -v $(REPOSHARE_PATH):/reposhare \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
@@ -100,7 +98,6 @@ run :
 		echo "# Run spark_yarn mode zeppelin! "; \
 		echo "# Host Port : $(ZEPPELIN_HOST_PORT_YARN) , $(ZEPPELIN_HOST_WEBSOCKET_PORT_YARN)"; \
 		docker run --rm -i \
-        -v $(USERS_PATH):/user \
         -v $(REPOSHARE_PATH):/reposhare \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
@@ -116,7 +113,6 @@ run :
 		echo "# Run mesos backend zeppelin! "; \
 		echo "# Host Port : $(ZEPPELIN_HOST_PORT_MESOS) , $(ZEPPELIN_HOST_WEBSOCKET_PORT_MESOS)"; \
 		docker run --rm -i \
-        -v $(USERS_PATH):/user \
         -v $(REPOSHARE_PATH):/reposhare \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
@@ -133,7 +129,6 @@ run :
 		echo "Please set here zeppelin new_item."; \
 		\
 		docker run --rm -i \
-        -v $(USERS_PATH):/user \
         -v $(REPOSHARE_PATH):/reposhare \
 		-e BRANCH=$(BRANCH) \
 		-e REPO=$(REPO) \
