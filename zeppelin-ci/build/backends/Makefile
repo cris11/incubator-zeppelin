@@ -100,11 +100,11 @@ run :
 		-e CONT_NAME=$(name) \
 		--name $(name) \
 		-h sparkmaster \
-		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_MASTER_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_MASTER_WEBUI_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_WORKER_WEBUI_PORT) \
-		-p $(GET_RND_PORT):$(ZEPPELIN_WEBSOCKET_PORT) \
+		-p $(ZEPPELIN_PORT) \
+		-p $(SPARK_MASTER_PORT) \
+		-p $(SPARK_MASTER_WEBUI_PORT) \
+		-p $(SPARK_WORKER_WEBUI_PORT) \
+		-p $(ZEPPELIN_WEBSOCKET_PORT) \
 		$(type):$(IMAGE_VERSION) /bin/bash; \
 		\
 	elif [ $(type) = "spark_yarn" ]; then \
@@ -115,23 +115,23 @@ run :
 		-e CONT_NAME=$(name) \
 		--name $(name) \
 		-h sparkmaster \
-		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_MASTER_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_MASTER_WEBUI_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_WORKER_WEBUI_PORT) \
-		-p $(GET_RND_PORT):$(ZEPPELIN_WEBSOCKET_PORT) \
-		-p $(GET_RND_PORT):$(HDFS_NN_COMMAND_PORT) \
-		-p $(GET_RND_PORT):$(YARN_JOB_TRACKER_PORT) \
-		-p $(GET_RND_PORT):$(YARN_RM_HTTP_PORT) \
-		-p $(GET_RND_PORT):$(YARN_NN_HTTP_PORT) \
-		-p $(GET_RND_PORT):$(YARN_RM_SCHEDULER_PORT) \
-		-p $(GET_RND_PORT):$(YARN_RM_RT_PORT) \
-		-p $(GET_RND_PORT):$(YARN_RM_PORT) \
-		-p $(GET_RND_PORT):$(YARN_RM_ADMIN_PORT) \
-		-p $(GET_RND_PORT):$(HDFS_DN_DATA_PORT) \
-		-p $(GET_RND_PORT):$(HDFS_DN_COMMAND_PORT) \
-		-p $(GET_RND_PORT):$(HDFS_DN_HTTP_PORT) \
-		-p $(GET_RND_PORT):$(HDFS_NN_HTTP_PORT) \
+		-p $(ZEPPELIN_PORT) \
+		-p $(SPARK_MASTER_PORT) \
+		-p $(SPARK_MASTER_WEBUI_PORT) \
+		-p $(SPARK_WORKER_WEBUI_PORT) \
+		-p $(ZEPPELIN_WEBSOCKET_PORT) \
+		-p $(HDFS_NN_COMMAND_PORT) \
+		-p $(YARN_JOB_TRACKER_PORT) \
+		-p $(YARN_RM_HTTP_PORT) \
+		-p $(YARN_NN_HTTP_PORT) \
+		-p $(YARN_RM_SCHEDULER_PORT) \
+		-p $(YARN_RM_RT_PORT) \
+		-p $(YARN_RM_PORT) \
+		-p $(YARN_RM_ADMIN_PORT) \
+		-p $(HDFS_DN_DATA_PORT) \
+		-p $(HDFS_DN_COMMAND_PORT) \
+		-p $(HDFS_DN_HTTP_PORT) \
+		-p $(HDFS_NN_HTTP_PORT) \
 		$(type):$(IMAGE_VERSION) /bin/bash; \
 		\
 	elif [ $(type) = "spark_mesos" ]; then\
@@ -142,12 +142,12 @@ run :
 		-e CONT_NAME=$(name) \
 		--name $(name) \
 		-h sparkmaster \
-		-p $(GET_RND_PORT):$(ZEPPELIN_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_MASTER_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_MASTER_WEBUI_PORT) \
-		-p $(GET_RND_PORT):$(SPARK_WORKER_WEBUI_PORT) \
-		-p $(GET_RND_PORT):$(ZEPPELIN_WEBSOCKET_PORT) \
-		-p $(GET_RND_PORT):$(MESOS_PORT) \
+		-p $(ZEPPELIN_PORT) \
+		-p $(SPARK_MASTER_PORT) \
+		-p $(SPARK_MASTER_WEBUI_PORT) \
+		-p $(SPARK_WORKER_WEBUI_PORT) \
+		-p $(ZEPPELIN_WEBSOCKET_PORT) \
+		-p $(MESOS_PORT) \
 		$(type):$(IMAGE_VERSION) /bin/bash; \
 		\
 	elif [ $(type) = "new_item" ]; then\
