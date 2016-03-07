@@ -80,13 +80,13 @@ jobs:
 
 install:
     - echo "# starting install."
-    - mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $BUILD_FLAG $PROFILE -B
+    - #mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $BUILD_FLAG $PROFILE -B
     - echo "# install completed."
 
 
 script:
     - echo "# starting script."
-    - mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $TEST_FLAG $PROFILE -B $TEST_PROJECTS $ADD_ENV
+    - #mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $TEST_FLAG $PROFILE -B $TEST_PROJECTS $ADD_ENV
     - echo "# script completed."
 
 
