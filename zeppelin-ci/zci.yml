@@ -69,12 +69,12 @@ jobs:
 
     - id: 2
       item: spark_mesos
-      orders: all
+      orders: all-modules spark-modules
       retry: 2
 
     - id: 3
       item: spark_standalone
-      orders: add-env
+      orders: all-modules spark-modules
       retry: 2
 
 
