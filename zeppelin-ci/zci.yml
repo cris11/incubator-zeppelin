@@ -79,15 +79,15 @@ jobs:
 
 
 install:
-    - echo "starting install."
-    - echo "mvn $BUILD_FLAG $PROFILE -B"
-    - echo "install completed."
+    - echo "# starting install."
+    - mvn $BUILD_FLAG $PROFILE -B
+    - echo "# install completed."
 
 
 script:
-    - echo "starting script."
-    - echo "mvn $TEST_FLAG $PROFILE -B $TEST_PROJECTS $ADD_ENV"
-    - echo "script completed."
+    - echo "# starting script."
+    - mvn $TEST_FLAG $PROFILE -B $TEST_PROJECTS $ADD_ENV
+    - echo "# script completed."
 
 
 # -------------------------------------------------------------------------
