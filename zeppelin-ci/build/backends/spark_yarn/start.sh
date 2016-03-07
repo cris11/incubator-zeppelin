@@ -18,7 +18,9 @@ function setup_hadoop
 
 	if [ ! -d ${REPOSHARE_HADOOP} ]; then
 		mkdir -p /reposhare/hadoop
+		echo "1"
 		tar xfz /reposhare/hadoop/hadoop-${HADOOP_VER}.0.tar.gz
+		echo "2"
 	else
 		echo " - check dir"
 	fi
