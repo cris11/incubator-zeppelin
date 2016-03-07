@@ -16,7 +16,7 @@ order:
         PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Pscalding
         BUILD_FLAG: package -Pbuild-distr
         TEST_PROJECTS: ""
-        TEST_FLAG: verify -Pusing-packaged-distr
+        TEST_FLAG: verify -Drat.skip=true -Pusing-packaged-distr
 
     - id : spark-modules
       jdk: oraclejdk7
@@ -25,7 +25,7 @@ order:
         HADOOP_VER: 2.3
         PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Ppyspark
         BUILD_FLAG: package -DskipTests
-        TEST_FLAG: verify
+        TEST_FLAG: verify -Drat.skip=true
         TEST_PROJECTS: -pl zeppelin-interpreter,zeppelin-zengine,zeppelin-server,zeppelin-display,spark-dependencies,spark -Dtest=org.apache.zeppelin.rest.*Test,org.apache.zeppelin.spark* -DfailIfNoTests=false 
 
     - id : test-selenium
@@ -35,7 +35,7 @@ order:
         HADOOP_VER: 2.3
         PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Ppyspark
         BUILD_FLAG: package -DskipTests
-        TEST_FLAG: verify
+        TEST_FLAG: verify -Drat.skip=true
         TEST_PROJECTS: -pl zeppelin-interpreter,zeppelin-zengine,zeppelin-server,zeppelin-display,spark-dependencies,spark -Dtest=org.apache.zeppelin.rest.*Test,org.apache.zeppelin.spark* -DfailIfNoTests=false 
 
     - id : add-env

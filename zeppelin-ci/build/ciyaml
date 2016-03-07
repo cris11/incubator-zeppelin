@@ -150,11 +150,15 @@ function parse_jobs
 function parse_etc
 {
 	# install
-	cat $yaml_file | $EXE get-values install > ${base_path}/install.sh
+	echo "#!/bin/bash" > ${base_path}/install.sh
+	echo "set -e" >> ${base_path}/install.sh
+	cat $yaml_file | $EXE get-values install >> ${base_path}/install.sh
 	chmod +x ${base_path}/install.sh
 
 	# script
-	cat $yaml_file | $EXE get-values script > ${base_path}/script.sh
+	echo "#!/bin/bash" > ${base_path}/script.sh
+	echo "set -e" >> ${base_path}/script.sh
+	cat $yaml_file | $EXE get-values script >> ${base_path}/script.sh
 	chmod +x ${base_path}/script.sh
 }
 
