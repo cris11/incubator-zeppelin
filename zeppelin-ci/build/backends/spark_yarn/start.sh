@@ -8,7 +8,7 @@ SPARK_SHARE=/reposhare/$BUILD_TYPE
 
 
 # ----------------------------------------------------------------------
-# Setup hadoop ( deafults )
+# - Setup hadoop ( deafults )
 # ----------------------------------------------------------------------
 function setup_hadoop
 {
@@ -31,10 +31,10 @@ function setup_hadoop
 	\cp -f $HADOOP_PREFIX/etc/hadoop/*.xml $HADOOP_PREFIX/input
 
 	# add config
-	\cp -f /tmp/conf/core-site.xml $HADOOP_PREFIX/etc/hadoop/core-site.xml
-	\cp -f /tmp/conf/hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
-	\cp -f /tmp/conf/mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
-	\cp -f /tmp/conf/yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
+	\cp -f /tmp/core-site.xml $HADOOP_PREFIX/etc/hadoop/core-site.xml
+	\cp -f /tmp/hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
+	\cp -f /tmp/mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
+	\cp -f /tmp/yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
 
 	# format of hdfs
 	mkdir -p /data/
@@ -51,7 +51,6 @@ function setup_hadoop
 	echo ${HADOOP_VER} > /current_hadoop
 }
 
-# ---
 if [ ! -f /current_hadoop ]; then
 	setup_hadoop
 fi
@@ -62,18 +61,12 @@ else
 	echo "# current hadoop version : ${HADOOP_VER}"
 	setup_hadoop
 fi
-# ---
 
 
 # ----------------------------------------------------------------------
-# Setup spark
+# - Setup spark for yarn
 # ----------------------------------------------------------------------
 SPARK_DAT=spark-$SPARK_VER-bin-hadoop$HADOOP_VER
-
-if [ ! -d $SPARK_SHARE/$SPARK_DAT ]; then
-	SPARK_BIN=$SPARK_DAT.tgz
-	tar xfz /reposhare/$SPARK_BIN -C $SPARK_SHARE
-fi
 
 export SPARK_MASTER_PORT=7077
 export SPARK_MASTER_WEBUI_PORT=7072
@@ -90,7 +83,7 @@ if [ ! -f /tmp/hosts ]; then
 fi
 
 # ----------------------------------------------------------------------
-# - Run backend & spark 
+# - Run backend
 # ----------------------------------------------------------------------
 # create PID dir. test case detect pid file so they can select active spark home dir for test
 mkdir -p ${SPARK_HOME}/run
