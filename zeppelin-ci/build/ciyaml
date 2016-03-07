@@ -76,7 +76,8 @@ function parse_jobs_sparkver
 			#echo "order_${cnt}=${envfile}" >> $2
 			echo "order_${cnt}=${1}/${envname}" >> $2
 		else
-			echo "order_all_${cnt}=${envfile}" >> $2
+			#echo "order_all_${cnt}=${envfile}" >> $2
+			echo "order_all_${cnt}=${1}/${envname}" >> $2
 		fi
 
 		echo "build_name_${cnt}=${1} spark-${SPARK_VER} hadoop-${HADOOP_VER}" >> $2
