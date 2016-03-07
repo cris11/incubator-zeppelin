@@ -10,7 +10,7 @@
 
 BUILD_HOME=$(shell pwd)
 
-BUILD_DIR=/tmp/build/$(userhome)
+BUILD_DIR=/tmp/build/$(name)
 REPOSHARE_DIR=/tmp/build/reposhare
 ZEPPELIN_BUILD_DIR=$(BUILD_DIR)/zeppelin
 INTERPRETER_BUILD_DIR=$(BUILD_DIR)/backends
@@ -18,23 +18,19 @@ INTERPRETER_BUILD_DIR=$(BUILD_DIR)/backends
 LOCALREPO_DAT=/opt/localrepo
 LOCALREPO_BIN=$(BUILD_HOME)/build/localrepo/bin
 
-ZCI_ENV_FILE=.zci.env
-USER_ZCI_ENV=$(ZCI_ENV_FILE).$(userhome)
-ZCI_ENV=$(BUILD_HOME)/$(ZCI_ENV_FILE)
-ZCI_YML=$(BUILD_HOME)/zci.yml
+#ZCI_ENV=$(BUILD_HOME)/zeppelin/zeppelin-ci/build/conf
+ZCI_ENV=$(BUILD_HOME)/build/conf
+ZCI_ENV_FILE=$(BUILD_HOME)/build/conf/.zci.env
 
+ZEPP_HOME=$(REPOSHARE_DIR)/users/$(name)
+USER_ZCI_ENV=$(ZEPP_HOME)/zeppelin/zeppelin-ci/build/conf
 
 
 # -----------------------------------------------------------------------------
 # - Call Funtions
 # -----------------------------------------------------------------------------
 
-setup_comm = \
-	mkdir -p $(REPOSHARE_DIR); \
-	cp -f $(ZCI_ENV) $(REPOSHARE_DIR)/$(USER_ZCI_ENV)
-
 setup_back = \
-	$(call setup_comm); \
 	mkdir -p $(INTERPRETER_BUILD_DIR); \
 	rm -rf $(INTERPRETER_BUILD_DIR)/$(item); \
 	\
@@ -47,7 +43,6 @@ setup_back = \
 	fi
 
 setup_zepp = \
-	$(call setup_comm); \
 	mkdir -p $(ZEPPELIN_BUILD_DIR)/os/centos; \
 	rm -rf $(ZEPPELIN_BUILD_DIR)/os/centos/$(item); \
 	\
@@ -63,7 +58,7 @@ setup_zepp = \
 	fi
 
 run_job =  \
-	source $(ZCI_ENV); \
+	source $(ZCI_ENV_FILE); \
 	for dir in $$(find $(1) -type d); do \
 	  ( \
 		cd $$dir ; \
@@ -76,11 +71,9 @@ run_job =  \
 					make $2 -f Makefile \
 						type=`basename $$t` \
 						name=$(name) \
-						REPO=$(REPO) \
-						BRANCH=$(BRANCH) \
 						BUILD_HOME=$(BUILD_HOME) \
 						BUILD_PATH=$$t \
-						ZCI_ENV=$(USER_ZCI_ENV) \
+						ZCI_ENV=$(ZCI_ENV) \
 						REPOSHARE_PATH=$(REPOSHARE_DIR); \
 					$(BUILD_HOME)/build/buildstep.sh putres $(REPOSHARE_DIR) $(name) $$?; \
 					echo ""; \
@@ -122,8 +115,7 @@ help:
 	@echo 
 
 env :
-	@echo "$(ZCI_ENV)" > .envfile
-	@build/buildstep.sh envload $(ZCI_YML) $(ZCI_ENV)
+	@build/ciyaml
 
 build : env
 	@if [ -z $(type) ]; then \
@@ -136,7 +128,7 @@ build : env
 	fi; \
 	echo "* Build Type     : $(type)"; echo ""; \
 	\
-	$(LOCALREPO_BIN)/get_build_dat.sh $(ZCI_ENV) $(LOCALREPO_DAT); \
+	$(LOCALREPO_BIN)/get_build_dat.sh $(LOCALREPO_BIN) $(ZCI_ENV) $(LOCALREPO_DAT); \
 	if [ "$(type)" = "backend" ]; then \
 		$(call setup_back); \
 		$(call run_job,$(INTERPRETER_BUILD_DIR),$@,$(item)) \
@@ -148,7 +140,7 @@ build : env
 		exit 1; \
 	fi;
 
-run : env
+run :
 	@if [ -z $(type) ]; then \
 		echo "Type \"make help\" to run. please..";\
 		exit 1; \
