@@ -63,7 +63,7 @@ order:
 # -------------------------------------------------------------------------
 jobs:
     - id: 1
-      item: spark_standalone
+      item: spark_yarn
       orders: all-modules spark-modules
       retry: 2
 
@@ -73,7 +73,7 @@ jobs:
       retry: 2
 
     - id: 3
-      item: spark_yarn
+      item: spark_standalone
       orders: add-env
       retry: 2
 
