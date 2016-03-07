@@ -15,8 +15,8 @@ order:
         HADOOP_VER: 2.3
         PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Pscalding
         BUILD_FLAG: package -Pbuild-distr
-        TEST_PROJECTS: ""
         TEST_FLAG: verify -Drat.skip=true -Pusing-packaged-distr
+        TEST_PROJECTS: ""
 
     - id : spark-modules
       jdk: oraclejdk7
@@ -37,16 +37,6 @@ order:
         BUILD_FLAG: package -DskipTests
         TEST_FLAG: verify -Drat.skip=true
         TEST_PROJECTS: -pl zeppelin-interpreter,zeppelin-zengine,zeppelin-server,zeppelin-display,spark-dependencies,spark -Dtest=org.apache.zeppelin.rest.*Test,org.apache.zeppelin.spark* -DfailIfNoTests=false 
-
-    - id : add-env
-      jdk: oraclejdk7
-      env:
-        SPARK_VER: 1.6.0
-        HADOOP_VER: 2.3
-        PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Ppyspark
-        BUILD_FLAG: package -DskipTests
-        TEST_FLAG: verify
-        ADD_ENV: test
 
 
 # -------------------------------------------------------------------------
@@ -74,19 +64,19 @@ jobs:
 
     - id: 3
       item: spark_standalone
-      orders: all-modules spark-modules
+      orders: all
       retry: 0
 
 
 install:
     - echo "# starting install."
-    - #echo "mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $BUILD_FLAG $PROFILE -B"
+    - mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $BUILD_FLAG $PROFILE -B
     - echo "# install completed."
 
 
 script:
     - echo "# starting script."
-    - echo "mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $TEST_FLAG $PROFILE -B $TEST_PROJECTS $ADD_ENV"
+    - mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $TEST_FLAG $PROFILE -B $TEST_PROJECTS
     - echo "# script completed."
 
 
