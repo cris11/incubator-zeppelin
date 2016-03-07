@@ -1,6 +1,7 @@
 #!/bin/bash
 # define static variable
 IFS=' '
+EXE="/usr/local/bin/shyaml"
 yaml_file="zci.yml"
 base_path="build/conf"
 all_of_orders="${base_path}/.all_of_orders"
@@ -10,14 +11,14 @@ function parse_order
 {
 	let n=0; while true
 	do
-		id=`cat $yaml_file | shyaml get-value order.${n}.id 2>&1`
+		id=`cat $yaml_file | $EXE get-value order.${n}.id 2>&1`
 		ret=`echo $id | awk '{print $1}'`
 		if [[ $ret == "Error:" ]]; then
 			echo $order_all > $all_of_orders
 			break
 		fi
 
-		jdk=`cat $yaml_file | shyaml get-value order.${n}.jdk 2>&1`
+		jdk=`cat $yaml_file | $EXE get-value order.${n}.jdk 2>&1`
 		ret=`echo $jdk | awk '{print $1}'`
 		if [[ $ret == "Error:" ]]; then
 			echo $order_all > $all_of_orders
@@ -30,7 +31,7 @@ function parse_order
 		echo "export id=\"${id}\"" >> $order_id
 		echo "export jdk=\"${jdk}\"" >> $order_id
 
-		cat $yaml_file | shyaml key-values order.${n}.env | while read key
+		cat $yaml_file | $EXE key-values order.${n}.env | while read key
 		do
 			read val
 			echo "export ${key}=\"${val}\"" >> $order_id
@@ -90,7 +91,7 @@ function parse_jobs
 
 	let n=0; while true
 	do
-		id=`cat $yaml_file | shyaml get-value jobs.${n}.id 2>&1`
+		id=`cat $yaml_file | $EXE get-value jobs.${n}.id 2>&1`
 		ret=`echo $id | awk '{print $1}'`
 		if [[ $ret == "Error:" ]]; then
 			break
@@ -104,12 +105,12 @@ function parse_jobs
 		echo -n "" > $jobenv
 
 		# Image
-		image_ver=`cat $yaml_file | shyaml get-value image.ver 2>&1`
+		image_ver=`cat $yaml_file | $EXE get-value image.ver 2>&1`
 		echo "image_version=${image_ver}" > $job
 		echo "export IMAGE_VERSION=${image_ver}" > ${base_path}/.zci.env
 
 		# Job Compose
-		cat $yaml_file | shyaml key-values jobs.${n} | while read key
+		cat $yaml_file | $EXE key-values jobs.${n} | while read key
 		do
 			read val
 			echo "${key}=${val}" >> $job
@@ -149,11 +150,11 @@ function parse_jobs
 function parse_etc
 {
 	# install
-	cat $yaml_file | shyaml get-values install > ${base_path}/install.sh
+	cat $yaml_file | $EXE get-values install > ${base_path}/install.sh
 	chmod +x ${base_path}/install.sh
 
 	# script
-	cat $yaml_file | shyaml get-values script > ${base_path}/script.sh
+	cat $yaml_file | $EXE get-values script > ${base_path}/script.sh
 	chmod +x ${base_path}/script.sh
 }
 
