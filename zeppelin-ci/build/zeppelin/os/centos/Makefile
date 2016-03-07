@@ -68,7 +68,7 @@ run :
 		exit 1; \
 	fi; \
 	\
-	case $(type) in
+	case $(type) in \
 	    spark_standalone | \
 	    spark_yarn 		 | \
 	    spark_mesos 	 | \
