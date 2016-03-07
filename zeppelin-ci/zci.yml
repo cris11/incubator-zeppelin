@@ -65,17 +65,17 @@ jobs:
     - id: 1
       item: spark_yarn
       orders: all-modules spark-modules
-      retry: 2
+      retry: 0
 
     - id: 2
       item: spark_mesos
       orders: all-modules spark-modules
-      retry: 2
+      retry: 0
 
     - id: 3
       item: spark_standalone
       orders: all-modules spark-modules
-      retry: 2
+      retry: 0
 
 
 install:
