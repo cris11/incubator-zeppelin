@@ -14,6 +14,8 @@ function setup_hadoop
 {
 	REPOSHARE_HADOOP="/reposhare/hadoop/hadoop-${HADOOP_VER}.0"
 	echo "# hadoop : $REPOSHARE_HADOOP"
+	ls -l /reposhare/hadoop
+
 	if [ ! -d ${REPOSHARE_HADOOP} ]; then
 		mkdir -p /reposhare/hadoop
 		tar xfz /reposhare/hadoop/hadoop-${HADOOP_VER}.0.tar.gz
