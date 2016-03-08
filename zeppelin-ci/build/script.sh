@@ -5,6 +5,7 @@ zephome=$1
 envhome=$2
 envfile=$3
 src="/zeppelin-${SPARK_VER}"
+target="./zeppelin-${SPARK_VER}-test"
 SPARK_SHARE=/reposhare/$BUILD_TYPE
 SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
 
@@ -26,6 +27,9 @@ fi
 # run scripts
 #echo ""; cd $zephome
 #cp -rf /zeppelin-$SPARK_VER  $src-test/zeppelin-$SPARK_VER-test
-\cp -rf $src ${src}-test
-echo ""; cd ${src}-test
+
+cd $zephome; cd ..
+\cp -rf $src $target
+
+cd $target
 $envhome/script.sh
