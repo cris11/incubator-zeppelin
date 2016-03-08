@@ -58,7 +58,7 @@ order:
 jobs:
     - id: 1
       item: spark_standalone
-      orders: all
+      orders: none
       retry: 2
 
     - id: 2
