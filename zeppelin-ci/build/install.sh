@@ -8,9 +8,7 @@ envfile=$3
 
 #cd $zephome
 
-if [[ ! -d /zeppelin ]; then
-	cp -rf $zephome /zeppelin-$SPARK_VER
-fi
-
+#if [[ ! -d /zeppelin ]; then
+cp -rf $zephome /zeppelin-$SPARK_VER
 cd /zeppelin-$SPARK_VER
 $envhome/install.sh
