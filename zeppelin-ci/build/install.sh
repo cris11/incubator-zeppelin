@@ -13,6 +13,8 @@ src="/zeppelin-${SPARK_VER}"
 #	cp -rf $zephome $src
 #fi
 
+aaa
+
 \cp -rf $zephome $src
 cd $src
 $envhome/install.sh
