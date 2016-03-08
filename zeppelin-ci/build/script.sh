@@ -26,6 +26,6 @@ fi
 # run scripts
 #echo ""; cd $zephome
 #cp -rf /zeppelin-$SPARK_VER  $src-test/zeppelin-$SPARK_VER-test
-cp -rf $src ${src}-test
+\cp -rf $src ${src}-test
 echo ""; cd ${src}-test
 $envhome/script.sh

@@ -177,7 +177,6 @@ function parse_etc
 
 	# failure
 	echo "#!/bin/bash" > ${base_path}/failure.sh
-	echo "set -e" >> ${base_path}/failure.sh
 	cat $yaml_file | $EXE get-values failure >> ${base_path}/failure.sh
 	chmod +x ${base_path}/failure.sh
 }
