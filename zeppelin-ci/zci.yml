@@ -17,6 +17,8 @@ order:
         BUILD_FLAG: package -Pbuild-distr
         TEST_FLAG: verify -Drat.skip=true -Pusing-packaged-distr
         TEST_PROJECTS: ""
+        MAVEN_FLAG: -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
+
 
     - id : spark-modules
       jdk: oraclejdk7
@@ -27,6 +29,7 @@ order:
         BUILD_FLAG: package -DskipTests
         TEST_FLAG: verify -Drat.skip=true
         TEST_PROJECTS: -pl zeppelin-interpreter,zeppelin-zengine,zeppelin-server,zeppelin-display,spark-dependencies,spark -Dtest=org.apache.zeppelin.rest.*Test,org.apache.zeppelin.spark* -DfailIfNoTests=false 
+        MAVEN_FLAG: -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
 
     - id : test-selenium
       jdk: oraclejdk7
@@ -37,13 +40,14 @@ order:
         BUILD_FLAG: package -DskipTests
         TEST_FLAG: verify -Drat.skip=true
         TEST_PROJECTS: -pl zeppelin-interpreter,zeppelin-zengine,zeppelin-server,zeppelin-display,spark-dependencies,spark -Dtest=org.apache.zeppelin.rest.*Test,org.apache.zeppelin.spark* -DfailIfNoTests=false 
+        MAVEN_FLAG: -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
 
 
 # -------------------------------------------------------------------------
 #  Set parallel jobs ( with Jenkins )
 #   - Desc 
-#     > Job Max   : 3 
-#     > Job Range : 1 ~ 3
+#     > Job ID Range : 1 ~ 3
+#     > Job ID Max   : 3 
 #
 #   - Param
 #     > id    : id is jenkins-job number
@@ -55,28 +59,28 @@ jobs:
     - id: 1
       item: spark_mesos
       orders: none
-      retry: 0
+      retry: 2
 
     - id: 2
       item: spark_standalone
       orders: spark-modules
-      retry: 0
+      retry: 2
 
     - id: 3
       item: spark_yarn
       orders: none
-      retry: 0
+      retry: 2
 
 
 install:
-    - echo "# starting install."
-    - mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $BUILD_FLAG $PROFILE -B
+    - echo "# install started."
+    - mvn $MAVEN_FLAG $BUILD_FLAG $PROFILE -B
     - echo "# install completed."
 
 
 script:
-    - echo "# starting script."
-    - mvn -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true $TEST_FLAG $PROFILE -B $TEST_PROJECTS
+    - echo "# script started."
+    - mvn $MAVEN_FLAG $TEST_FLAG $PROFILE -B $TEST_PROJECTS
     - echo "# script completed."
 
 
