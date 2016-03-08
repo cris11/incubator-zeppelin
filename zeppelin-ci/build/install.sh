@@ -6,5 +6,11 @@ zephome=$1
 envhome=$2
 envfile=$3
 
-cd $zephome
+#cd $zephome
+
+if [[ ! -d /zeppelin ]; then
+	cp -rf $zephome /zeppelin-$SPARK_VER
+fi
+
+cd /zeppelin-$SPARK_VER
 $envhome/install.sh

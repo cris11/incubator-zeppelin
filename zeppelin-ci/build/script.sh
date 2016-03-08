@@ -23,5 +23,7 @@ if [[ $BUILD_TYPE == "spark_yarn" ]]; then
 fi
 
 # run scripts
-echo ""; cd $zephome
+#echo ""; cd $zephome
+cp -rf /zeppelin-$SPARK_VER  /zeppelin-$SPARK_VER-test
+echo ""; cd /zeppelin-$SPARK_VER-test
 $envhome/script.sh
