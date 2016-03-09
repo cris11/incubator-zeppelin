@@ -9,13 +9,17 @@ target="./zeppelin-${SPARK_VER}-test"
 SPARK_SHARE=/reposhare/$BUILD_TYPE
 SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
 
+# --------------------------------------------------
 # confirm spark binary
+# --------------------------------------------------
 if [ ! -d $SPARK_SHARE/$SPARK_DAT ]; then
 	SPARK_BIN=$SPARK_DAT.tgz
 	tar xfz /reposhare/$SPARK_BIN -C $SPARK_SHARE
 fi
 
+# --------------------------------------------------
 # set spark home
+# --------------------------------------------------
 \cp -f /tmp/zeppelin-env.sh $zephome/conf/
 echo "export SPARK_HOME=$SPARK_SHARE/$SPARK_DAT" >> $zephome/conf/zeppelin-env.sh
 
@@ -24,12 +28,20 @@ if [[ $BUILD_TYPE == "spark_yarn" ]]; then
 	\cp -f /tmp/spark_conf/*  ${SPARK_SHARE}/${SPARK_DAT}/conf/
 fi
 
-# run scripts
-#echo ""; cd $zephome
-#cp -rf /zeppelin-$SPARK_VER  $src-test/zeppelin-$SPARK_VER-test
-
+# --------------------------------------------------
+# copy installed source
+# --------------------------------------------------
 cd $zephome; cd ..
 \cp -rf $src $target
 
+# --------------------------------------------------
+# run scripts
+# --------------------------------------------------
 cd $target
 $envhome/script.sh
+
+# --------------------------------------------------
+# remove source
+# --------------------------------------------------
+cd ..
+rm -rf $target
