@@ -22,5 +22,4 @@ $envhome/install.sh
 # remove source
 # ----------------------------------------------
 echo "# remove souce"
-cd..
-rm -rf $src
+cd ..; rm -rf $src
