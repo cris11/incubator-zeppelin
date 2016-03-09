@@ -29,7 +29,7 @@ if [[ $BUILD_TYPE == "spark_yarn" ]]; then
 fi
 
 # --------------------------------------------------
-# copy installed source
+# copy installed source ( container aufs to host fs )
 # --------------------------------------------------
 cd $zephome; cd ..
 \cp -rf $src $target
@@ -37,11 +37,26 @@ cd $zephome; cd ..
 # --------------------------------------------------
 # run scripts
 # --------------------------------------------------
+echo ""
+echo -n "# Current DIR : "
+pwd
+echo ""
+
 cd $target
 $envhome/script.sh
 
 # --------------------------------------------------
 # remove source
 # --------------------------------------------------
+echo "# remove souce"
+
+# install source
+rm -rf $src
+
+# test source
 cd ..
 rm -rf $target
+
+# --------------------------------------------------
+# end of scripts
+# --------------------------------------------------

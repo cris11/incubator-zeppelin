@@ -17,9 +17,3 @@ fi
 #\cp -rf $zephome $src
 cd $src
 $envhome/install.sh
-
-# ----------------------------------------------
-# remove source
-# ----------------------------------------------
-echo "# remove souce"
-cd ..; rm -rf $src
