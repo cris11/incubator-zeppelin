@@ -44,8 +44,8 @@ set +e
 # --------------------------------------------------
 # backend start
 # --------------------------------------------------
-echo "# ${BACK_EXEC_START}"
-/reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} &
+echo "# /reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} > /backend.log 2>&1 &"
+/reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} > /backend.log 2>&1 &
 echo "# Backend Started ."
 
 # --------------------------------------------------
@@ -63,7 +63,7 @@ ret=`echo $?`
 # --------------------------------------------------
 # backend stop
 # --------------------------------------------------
-echo "# ${BACK_EXEC_STOP}"
+echo "# /reposhare/scripts/${envitem}/stop.sh ${zephome} ${envhome} ${envfile}"
 /reposhare/scripts/${envitem}/stop.sh ${zephome} ${envhome} ${envfile}
 echo "# Backend Stopped ."
 
@@ -83,7 +83,7 @@ rm -rf $src
 cd ..
 rm -rf $target
 
-
+exit 0
 # --------------------------------------------------
 # end of scripts
 # --------------------------------------------------
