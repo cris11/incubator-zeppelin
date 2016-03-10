@@ -5,18 +5,22 @@ zephome=$1
 envhome=$2
 envfile=$3
 src="/zeppelin-${SPARK_VER}"
-src_test="./zeppelin-${SPARK_VER}-test"
+src_test="zeppelin-${SPARK_VER}-test"
 
 # run scripts
 #echo ""; cd $zephome
 #cp -rf /zeppelin-$SPARK_VER  $src-test/zeppelin-$SPARK_VER-test
 #cp -rf $src ${src}-${SPARK_VER}-test
 
-if [ -d $src ]; then
-	cd $src
+home=`cd $zephome;cd ..;pwd`
+
+if [ -d "$home/$src_test" ]; then
+	cd $home/$src_test
 else
-	cd $zephome; cd ..
-	cd $src_test
+	cd $src
 fi
 
+echo -n "Current DIR : "; pwd
 $envhome/failure.sh
+
+exit 0
