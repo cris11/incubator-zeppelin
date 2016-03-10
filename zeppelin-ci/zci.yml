@@ -44,7 +44,7 @@ order:
     - id : test-spark-modules
       jdk: oraclejdk7
       env:
-        SPARK_VER: 1.4.1
+        SPARK_VER: 1.2.2
         HADOOP_VER: 2.3
         PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Ppyspark
         BUILD_FLAG: package -DskipTests
