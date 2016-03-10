@@ -4,7 +4,7 @@ source $2/$3
 zephome=$1
 envhome=$2
 envfile=$3
-envitem=$4
+#envitem=$4
 src="/zeppelin-${SPARK_VER}"
 target="./zeppelin-${SPARK_VER}-test"
 SPARK_SHARE=/reposhare/$BUILD_TYPE
@@ -40,13 +40,13 @@ fi
 ### test ver
 ###\cp -rf /reposhare/zepp/$src $target
 
-set +e
-# --------------------------------------------------
-# backend start
-# --------------------------------------------------
-echo "# /reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} > /backend.log 2>&1 &"
-/reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} > /backend.log 2>&1 &
-echo "# Backend Started ."
+#set +e
+## --------------------------------------------------
+## backend start
+## --------------------------------------------------
+#echo "# /reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} > /backend.log 2>&1 &"
+#/reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} > /backend.log 2>&1 &
+#echo "# Backend Started ."
 
 # --------------------------------------------------
 # run scripts
@@ -63,13 +63,13 @@ ret=`echo $?`
 # --------------------------------------------------
 # backend stop
 # --------------------------------------------------
-echo "# /reposhare/scripts/${envitem}/stop.sh ${zephome} ${envhome} ${envfile}"
-/reposhare/scripts/${envitem}/stop.sh ${zephome} ${envhome} ${envfile}
-echo "# Backend Stopped ."
+#echo "# /reposhare/scripts/${envitem}/stop.sh ${zephome} ${envhome} ${envfile}"
+#/reposhare/scripts/${envitem}/stop.sh ${zephome} ${envhome} ${envfile}
+#echo "# Backend Stopped ."
 
-if [[ $ret != 0 ]]; then
-	exit 1
-fi
+#if [[ $ret != 0 ]]; then
+#	exit 1
+#fi
 
 # --------------------------------------------------
 # remove source
@@ -83,7 +83,7 @@ rm -rf $src
 cd ..
 rm -rf $target
 
-exit 0
+#.exit 0
 # --------------------------------------------------
 # end of scripts
 # --------------------------------------------------
