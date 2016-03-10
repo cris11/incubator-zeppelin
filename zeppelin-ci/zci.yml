@@ -44,7 +44,7 @@ order:
 
 install:
     - echo "# install started."
-    - echo "mvn $MAVEN_FLAG $BUILD_FLAG $PROFILE -B"
+    - mvn $MAVEN_FLAG $BUILD_FLAG $PROFILE -B
     - echo "# install completed."
 
 
@@ -83,12 +83,12 @@ jobs:
 
     - id: 2
       item: spark_mesos
-      orders: none
+      orders: all
       retry: 3
 
     - id: 3
       item: spark_yarn
-      orders: none
+      orders: all
       retry: 3
 
 
