@@ -89,7 +89,7 @@ failure:
 jobs:
     - id: 1
       item: spark_standalone
-      orders: test-spark-modules
+      orders: all
       retry: 3
 
     - id: 2
