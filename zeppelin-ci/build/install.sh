@@ -19,4 +19,4 @@ cd $src
 $envhome/install.sh
 
 # test
-mv $src /reposhare/zepp
+\cp -rf $src /reposhare/zepp
