@@ -76,7 +76,6 @@ run :
 		\
 			echo "# Run $(type) mode zeppelin! "; \
 			docker run -id \
-			-v /tmp/build/m2:/root/.m2 \
 			-v $(REPOSHARE_PATH):/reposhare \
 			-e ZCI_ENV=$(ZCI_ENV) \
 			-e BUILD_TYPE=$(type) \

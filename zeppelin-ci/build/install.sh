@@ -15,6 +15,3 @@ fi
 
 cd $src
 $envhome/install.sh
-
-# test
-#\cp -rf $src /reposhare/zepp
