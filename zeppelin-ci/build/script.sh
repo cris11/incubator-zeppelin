@@ -4,6 +4,7 @@ source $2/$3
 zephome=$1
 envhome=$2
 envfile=$3
+envitem=$4
 src="/zeppelin-${SPARK_VER}"
 target="./zeppelin-${SPARK_VER}-test"
 SPARK_SHARE=/reposhare/$BUILD_TYPE
@@ -32,10 +33,20 @@ fi
 # copy installed source ( container aufs to host fs )
 # --------------------------------------------------
 cd $zephome; cd ..
-\cp -rf $src $target
+if [ ! -d $target ]; then
+	\cp -rf $src $target
+fi
 
 ### test ver
 ###\cp -rf /reposhare/zepp/$src $target
+
+set +e
+# --------------------------------------------------
+# backend start
+# --------------------------------------------------
+echo "# ${BACK_EXEC_START}"
+/reposhare/scripts/${envitem}/start.sh ${zephome} ${envhome} ${envfile} &
+echo "# Backend Started ."
 
 # --------------------------------------------------
 # run scripts
@@ -47,6 +58,18 @@ echo ""
 
 cd $target
 $envhome/script.sh
+ret=`echo $?`
+
+# --------------------------------------------------
+# backend stop
+# --------------------------------------------------
+echo "# ${BACK_EXEC_STOP}"
+/reposhare/scripts/${envitem}/stop.sh ${zephome} ${envhome} ${envfile}
+echo "# Backend Stopped ."
+
+if [[ $ret != 0 ]]; then
+	exit 1
+fi
 
 # --------------------------------------------------
 # remove source
@@ -59,6 +82,7 @@ rm -rf $src
 # test source
 cd ..
 rm -rf $target
+
 
 # --------------------------------------------------
 # end of scripts
