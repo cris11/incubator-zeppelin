@@ -44,7 +44,7 @@ order:
     - id : test-spark-modules
       jdk: oraclejdk7
       env:
-        SPARK_VER: 1.2.2
+        SPARK_VER: 1.1.1
         HADOOP_VER: 2.3
         PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Ppyspark
         BUILD_FLAG: package -DskipTests
@@ -55,13 +55,13 @@ order:
 
 install:
     - echo "# install started."
-    - mvn $MAVEN_FLAG $BUILD_FLAG $PROFILE -B
+    - echo "mvn $MAVEN_FLAG $BUILD_FLAG $PROFILE -B"
     - echo "# install completed."
 
 
 script:
     - echo "# script started."
-    - echo "mvn $MAVEN_FLAG $TEST_FLAG $PROFILE -B $TEST_PROJECTS"
+    - mvn $MAVEN_FLAG $TEST_FLAG $PROFILE -B $TEST_PROJECTS
     - echo "# script completed."
 
 

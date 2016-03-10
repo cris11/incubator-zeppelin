@@ -32,7 +32,10 @@ fi
 # copy installed source ( container aufs to host fs )
 # --------------------------------------------------
 cd $zephome; cd ..
-\cp -rf $src $target
+#\cp -rf $src $target
+
+### test ver
+\cp -rf /reposhare/zepp/$src $target
 
 # --------------------------------------------------
 # run scripts
@@ -51,7 +54,7 @@ $envhome/script.sh
 echo "# remove souce"
 
 # install source
-rm -rf $src
+#rm -rf $src
 
 # test source
 cd ..

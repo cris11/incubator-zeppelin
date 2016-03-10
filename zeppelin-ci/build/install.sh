@@ -9,14 +9,12 @@ src="/zeppelin-${SPARK_VER}"
 # ----------------------------------------------
 # source copy
 # ----------------------------------------------
-#cd $zephome
 if [ ! -d $src ]; then
 	cp -rf $zephome $src
 fi
 
-#\cp -rf $zephome $src
 cd $src
 $envhome/install.sh
 
 # test
-\cp -rf $src /reposhare/zepp
+#\cp -rf $src /reposhare/zepp
