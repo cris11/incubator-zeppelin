@@ -7,7 +7,7 @@ envfile=$3
 #envitem=$4
 src="/zeppelin-${SPARK_VER}"
 #target="./zeppelin-${SPARK_VER}-test"
-target="/zeppelin-${SPARK_VER}-test"
+#target="/zeppelin-${SPARK_VER}-test"
 SPARK_SHARE=/reposhare/$BUILD_TYPE
 SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
 
@@ -33,14 +33,14 @@ fi
 # --------------------------------------------------
 # copy installed source ( container aufs to host fs )
 # --------------------------------------------------
-if [ ! -d $target ]; then
+#if [ ! -d $target ]; then
 ### ori ver
-#	cd $zephome; cd ..
-#	\cp -rf $src $target
+	#cd $zephome; cd ..
+	#\cp -rf $src $target
 
 ### test ver
-	\cp -rf /reposhare/zepp/$src $target
-fi
+#	\cp -rf /reposhare/zepp/$src $target
+#fi
 
 # --------------------------------------------------
 # set spark home
@@ -61,7 +61,8 @@ echo "export SPARK_HOME=$SPARK_SHARE/$SPARK_DAT" >> $target/conf/zeppelin-env.sh
 echo -n "# Current DIR : "
 pwd; echo ""
 
-cd $target
+#cd $target
+cd $src 
 $envhome/script.sh
 
 # --------------------------------------------------
@@ -74,13 +75,14 @@ $envhome/script.sh
 #fi
 
 echo "# remove souce"
+cd ..; rm -rf $src
 
 # install source
-rm -rf $src
-
+#rm -rf $src
+#
 # test source
-cd ..
-rm -rf $target
+##cd ..
+##rm -rf $target
 
 # --------------------------------------------------
 # end of scripts
