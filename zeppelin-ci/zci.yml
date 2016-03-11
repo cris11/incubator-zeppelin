@@ -83,7 +83,7 @@ jobs:
 
     - id: 2
       item: spark_mesos
-      orders: all
+      orders: all-modules
       retry: 3
 
     - id: 3
