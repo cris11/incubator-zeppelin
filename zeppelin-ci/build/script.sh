@@ -4,8 +4,8 @@ source $2/$3
 zephome=$1
 envhome=$2
 envfile=$3
-#envitem=$4
 src="/zeppelin-${SPARK_VER}"
+target="/zeppelin-${SPARK_VER}"
 #target="./zeppelin-${SPARK_VER}-test"
 #target="/zeppelin-${SPARK_VER}-test"
 SPARK_SHARE=/reposhare/$BUILD_TYPE
@@ -58,11 +58,10 @@ echo "export SPARK_HOME=$SPARK_SHARE/$SPARK_DAT" >> $target/conf/zeppelin-env.sh
 # --------------------------------------------------
 # run scripts
 # --------------------------------------------------
-echo -n "# Current DIR : "
-pwd; echo ""
+#echo -n "# Current DIR : "
+#pwd; echo ""
 
-#cd $target
-cd $src 
+cd $target
 $envhome/script.sh
 
 # --------------------------------------------------
@@ -74,8 +73,8 @@ $envhome/script.sh
 #	kill $pid
 #fi
 
-echo "# remove souce"
-cd ..; rm -rf $src
+echo "# remove souce : ${target}"; cd ..
+rm -rf $target
 
 # install source
 #rm -rf $src
