@@ -8,7 +8,8 @@ src="/zeppelin-${SPARK_VER}"
 target="/zeppelin-${SPARK_VER}"
 #target="./zeppelin-${SPARK_VER}-test"
 #target="/zeppelin-${SPARK_VER}-test"
-SPARK_SHARE=/reposhare/$BUILD_TYPE
+#SPARK_SHARE=/reposhare/$BUILD_TYPE
+SPARK_SHARE=/$BUILD_TYPE
 SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
 
 
@@ -25,10 +26,10 @@ SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
 # --------------------------------------------------
 # confirm spark binary
 # --------------------------------------------------
-if [ ! -d $SPARK_SHARE/$SPARK_DAT ]; then
-	SPARK_BIN=$SPARK_DAT.tgz
-	tar xfz /reposhare/$SPARK_BIN -C $SPARK_SHARE
-fi
+#if [ ! -d $SPARK_SHARE/$SPARK_DAT ]; then
+#	SPARK_BIN=$SPARK_DAT.tgz
+#	tar xfz /reposhare/$SPARK_BIN -C $SPARK_SHARE
+#fi
 
 # --------------------------------------------------
 # copy installed source ( container aufs to host fs )
