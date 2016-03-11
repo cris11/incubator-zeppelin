@@ -89,17 +89,17 @@ failure:
 jobs:
     - id: 1
       item: spark_standalone
-      orders: none
+      orders: all
       retry: 3
 
     - id: 2
       item: spark_mesos
-      orders: all-modules test-spark-module
+      orders: all
       retry: 3
 
     - id: 3
       item: spark_yarn
-      orders: test-spark-module
+      orders: all
       retry: 3
 
 
