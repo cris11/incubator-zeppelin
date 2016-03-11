@@ -41,17 +41,6 @@ order:
         TEST_PROJECTS: -pl zeppelin-interpreter,zeppelin-zengine,zeppelin-server,zeppelin-display,spark-dependencies,spark -Dtest=org.apache.zeppelin.rest.*Test,org.apache.zeppelin.spark* -DfailIfNoTests=false 
         MAVEN_FLAG: -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
 
-    - id : test-spark-module
-      jdk: oraclejdk7
-      env:
-        SPARK_VER: 1.1.1
-        HADOOP_VER: 2.3
-        PROFILE: -Pspark-(SPARK_VERSION) -Phadoop-2.3 -Ppyspark
-        BUILD_FLAG: package -DskipTests
-        TEST_FLAG: verify -Drat.skip=true
-        TEST_PROJECTS: -pl zeppelin-interpreter,zeppelin-zengine,zeppelin-server,zeppelin-display,spark-dependencies,spark -Dtest=org.apache.zeppelin.rest.*Test,org.apache.zeppelin.spark* -DfailIfNoTests=false 
-        MAVEN_FLAG: -s /reposhare/conf/maven-settings.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
-
 
 install:
     - echo "# install started."
