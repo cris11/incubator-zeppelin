@@ -44,7 +44,7 @@ order:
 
 install:
     - echo "# install started."
-    - mvn $MAVEN_FLAG $BUILD_FLAG $PROFILE -B
+    - echo "mvn $MAVEN_FLAG $BUILD_FLAG $PROFILE -B"
     - echo "# install completed."
 
 

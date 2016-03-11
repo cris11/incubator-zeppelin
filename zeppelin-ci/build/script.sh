@@ -7,15 +7,17 @@ envfile=$3
 #envitem=$4
 src="/zeppelin-${SPARK_VER}"
 #target="./zeppelin-${SPARK_VER}-test"
-target="/zeppelin-${SPARK_VER}-test"
+target="./zeppelin-${SPARK_VER}-test"
 SPARK_SHARE=/reposhare/$BUILD_TYPE
 SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
 
-Xvfb $DISPLAY -ac -screen 0 1280x1024x24 > $zephome/xvfb.log 2>&1 &
+Xvfb $DISPLAY -ac -screen 0 1280x1024x24 > /reposhare/xvfb-${BUILD_TYPE}-${SPARK_VER}.log 2>&1 &
 pid=`echo $!`
+sleep 1
 
 echo "# Xvfb Starting..."
-cat $zephome/xvfb.log
+echo "# PID : ${pid}"
+cat reposhare/xvfb-${BUILD_TYPE}-${SPARK_VER}.log
 echo ""
 
 # --------------------------------------------------
@@ -41,12 +43,12 @@ fi
 # copy installed source ( container aufs to host fs )
 # --------------------------------------------------
 cd $zephome; cd ..
-if [ ! -d $target ]; then
-	\cp -rf $src $target
-fi
+#if [ ! -d $target ]; then
+#	\cp -rf $src $target
+#fi
 
 ### test ver
-###\cp -rf /reposhare/zepp/$src $target
+\cp -rf /reposhare/zepp/$src $target
 
 # --------------------------------------------------
 # run scripts
@@ -64,6 +66,7 @@ ret=`echo $?`
 # remove source
 # --------------------------------------------------
 # Stop Xvfb
+echo "# Stopping Xvfb - PID(${pid})"
 if kill -0 $pid; then
 	kill $pid
 fi
