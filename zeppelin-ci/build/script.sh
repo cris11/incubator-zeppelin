@@ -5,16 +5,18 @@ zephome=$1
 envhome=$2
 envfile=$3
 target="/zeppelin-${SPARK_VER}"
-SPARK_SHARE="/reposhare/$BUILD_TYPE"
+#SPARK_SHARE="/reposhare/$BUILD_TYPE"
+SPARK_SHARE="/$BUILD_TYPE"
 SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
+SPARK_BIN=$SPARK_DAT.tgz
 
 # --------------------------------------------------
 # confirm spark binary
 # --------------------------------------------------
-if [ ! -d $SPARK_SHARE/$SPARK_DAT ]; then
-	SPARK_BIN=$SPARK_DAT.tgz
+#if [ ! -d $SPARK_SHARE/$SPARK_DAT ]; then
+	mkdir -p $SPARK_SHARE
 	tar xfz /reposhare/$SPARK_BIN -C $SPARK_SHARE
-fi
+#fi
 
 # --------------------------------------------------
 # set spark home
