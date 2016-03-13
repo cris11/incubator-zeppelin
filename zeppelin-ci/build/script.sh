@@ -32,6 +32,11 @@ echo "export SPARK_HOME=$SPARK_SHARE/$SPARK_DAT" >> $target/conf/zeppelin-env.sh
 # run scripts
 # --------------------------------------------------
 #cd $target
+if [ ! -d $btest ]; then
+	echo "# exist test source -> remove test sources : $btest"
+	rm -rf $btest
+fi
+
 \cp -rf $target $btest
 cd $btest
 $envhome/script.sh
