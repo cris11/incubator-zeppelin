@@ -5,6 +5,7 @@ zephome=$1
 envhome=$2
 envfile=$3
 target="/zeppelin-${SPARK_VER}"
+btest="/zeppelin-${SPARK_VER}-test"
 #SPARK_SHARE="/reposhare/$BUILD_TYPE"
 SPARK_SHARE="/$BUILD_TYPE"
 SPARK_DAT=spark-${SPARK_VER}-bin-hadoop${HADOOP_VER}
@@ -30,14 +31,17 @@ echo "export SPARK_HOME=$SPARK_SHARE/$SPARK_DAT" >> $target/conf/zeppelin-env.sh
 # --------------------------------------------------
 # run scripts
 # --------------------------------------------------
-cd $target
+#cd $target
+\cp -rf $target $btest
+cd $btest
 $envhome/script.sh
 
 # --------------------------------------------------
 # remove source
 # --------------------------------------------------
-echo "# remove souce : ${target}"; cd ..
-rm -rf $target
+echo "# remove sources"; cd /
+#rm -rf $target
+rm -rf $btest
 
 # --------------------------------------------------
 # end of scripts
