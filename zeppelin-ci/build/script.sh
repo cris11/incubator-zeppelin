@@ -40,7 +40,7 @@ $envhome/script.sh
 # remove source
 # --------------------------------------------------
 echo "# remove sources"; cd /
-#rm -rf $target
+rm -rf $target
 rm -rf $btest
 
 # --------------------------------------------------
