@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -xe
 source $2/$3
 zephome=$1
 envhome=$2
