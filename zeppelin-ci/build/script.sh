@@ -24,6 +24,7 @@ SPARK_BIN=$SPARK_DAT.tgz
 # --------------------------------------------------
 if [[ $BUILD_TYPE == "spark_yarn" ]]; then
 	\cp -f /tmp/spark_conf/*  ${SPARK_SHARE}/${SPARK_DAT}/conf/
+	echo "export HADOOP_CONF_DIR=\"$SPARK_SHARE/$SPARK_DAT/conf\"" >> $target/conf/zeppelin-env.sh
 fi
 \cp -f /tmp/zeppelin-env.sh $target/conf/
 echo "export SPARK_HOME=$SPARK_SHARE/$SPARK_DAT" >> $target/conf/zeppelin-env.sh
